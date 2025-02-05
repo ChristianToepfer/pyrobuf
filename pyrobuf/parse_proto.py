@@ -525,6 +525,8 @@ class Parser(object):
                 else:
                     assert token.token_type == 'RBRACKET'
                     return True
+        elif token.token_type == 'ENUM_FIELD':
+            field.options[custom_name] = token.name
         else:
             if token.token_type == 'LBRACE':
                 field.options[custom_name] = dict()
