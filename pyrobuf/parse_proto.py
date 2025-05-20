@@ -20,7 +20,7 @@ class Parser(object):
         ('EXTENSION', r'extensions\s+(\d+)\s+to\s+(\d+|max)\s*;'),
         ('ONEOF', r'oneof\s+([A-Za-z_][0-9A-Za-z_]*)'),
         ('MODIFIER', r'(optional|required|repeated)'),
-        ('FIELD', r'([A-Za-z][0-9A-Za-z_]*)\s+([A-Za-z][0-9A-Za-z_]*)\s*=\s*(\d+)'),
+        ('FIELD', r'(google.protobuf.)?[A-Za-z][0-9A-Za-z_]*)\s+([A-Za-z][0-9A-Za-z_]*)\s*=\s*(\d+)'),
         ('MAP_FIELD', r'map<([A-Za-z][0-9A-Za-z_]+),\s*([A-Za-z][0-9A-Za-z_]+)>\s+([A-Za-z][0-9A-Za-z_]*)\s*=\s*(\d+)'),
         ('DEFAULT', r'default\s*='),
         ('PACKED', r'packed\s*=\s*(true|false)'),
@@ -708,10 +708,13 @@ class Parser(object):
     class Field(Token):
         token_type = 'FIELD'
 
-        def __init__(self, line, ftype, name, index):
+        def __init__(self, line, prefix, ftype, name, index):
             self.line = line
             self.modifier = None
-            self.type = ftype
+            if prefix:  # google.protobuf.
+                self.type = 'GoogleProtobuf' + ftype
+            else:
+                self.type = ftype
             self.name = name
             self.index = int(index)
             self.default = None
