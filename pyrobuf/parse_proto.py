@@ -20,7 +20,7 @@ class Parser(object):
         ('EXTENSION', r'extensions\s+(\d+)\s+to\s+(\d+|max)\s*;'),
         ('ONEOF', r'oneof\s+([A-Za-z_][0-9A-Za-z_]*)'),
         ('MODIFIER', r'(optional|required|repeated)'),
-        ('FIELD', r'(google.protobuf.)?[A-Za-z][0-9A-Za-z_]*)\s+([A-Za-z][0-9A-Za-z_]*)\s*=\s*(\d+)'),
+        ('FIELD', r'(google.protobuf.)?([A-Za-z][0-9A-Za-z_]*)\s+([A-Za-z][0-9A-Za-z_]*)\s*=\s*(\d+)'),
         ('MAP_FIELD', r'map<([A-Za-z][0-9A-Za-z_]+),\s*([A-Za-z][0-9A-Za-z_]+)>\s+([A-Za-z][0-9A-Za-z_]*)\s*=\s*(\d+)'),
         ('DEFAULT', r'default\s*='),
         ('PACKED', r'packed\s*=\s*(true|false)'),
